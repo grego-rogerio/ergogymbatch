@@ -16,29 +16,24 @@ public class Usuario implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	private String login;
-	private String senha;
+	private String password;
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getUsuario() {
+
+	
+	public String getLogin() {
 		return login;
 	}
-	public void setUsuario(String login) {
+	public void setLogin(String login) {
 		this.login = login;
 	}
-	public String getSenha() {
-		return senha;
-	}
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-	
 	@Override
 	public String toString() {
-		return this.getUsuario();
+		return this.login;
 	}
 	
 	@Override
@@ -46,13 +41,21 @@ public class Usuario implements Serializable {
 		if(obj == null) return false;
 		
 		if(obj instanceof Usuario) {
-			if(((Usuario)obj).getUsuario().equals(this.getUsuario())) {
+			if(((Usuario)obj).getLogin().equals(this.getLogin())) {
 				return true;
 			}
 		}
 		return false;
 	}
 	
+	
+	
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	@Override
 	public int hashCode() {
 		return this.getId()*58;
