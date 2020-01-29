@@ -63,7 +63,7 @@ public class FuncionarioTest extends ErgogymbatchApplicationTests {
 	
 	@Test
 	public void testFuncionarioServiceSave() throws Exception{
-		List<Empresa> empresas = empresaController.findAll();
+		List<Empresa> empresas = (List<Empresa>) empresaController.findAll();
 		for(Empresa empresafisrt:empresas) {
 			this.empresa = empresafisrt;
 			break;
@@ -97,7 +97,7 @@ public class FuncionarioTest extends ErgogymbatchApplicationTests {
     public void testFuncionarioControllerCreated() throws Exception {
 		ResultMatcher ok = MockMvcResultMatchers.status().isOk();
 		
-		List<Empresa> empresas = empresaController.findAll();
+		List<Empresa> empresas = (List<Empresa>) empresaController.findAll();
 		for(Empresa empresafisrt:empresas) {
 			this.empresa = empresafisrt;
 			break;

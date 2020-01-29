@@ -13,51 +13,50 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.consultoria.ergogymbatch.model.Empresa;
-import com.consultoria.ergogymbatch.service.EmpresaService;
+import com.consultoria.ergogymbatch.model.Funcao;
+import com.consultoria.ergogymbatch.service.FuncaoService;
 
 @RestController
-@RequestMapping(value = "/empresa")
-public class EmpresaController {
+@RequestMapping(value = "/funcao")
+public class FuncaoController {
 
 	@Autowired
-	private EmpresaService empresaService;
+	private FuncaoService funcaoService;
 
 	@PostMapping
-	public ResponseEntity<Empresa> create(@RequestBody Empresa empresa) {
-		Empresa empresaReturn = empresaService.save(empresa);	
-		return ResponseEntity.ok().body(empresaReturn);
+	public ResponseEntity<Funcao> create(@RequestBody Funcao funcao) {
+		Funcao funcaoReturn = funcaoService.save(funcao);	
+		return ResponseEntity.ok().body(funcaoReturn);
 	}
 
 	@GetMapping(path = { "/{id}" })
-	public ResponseEntity<Empresa> findById(@PathVariable("id") int id) {
-		return empresaService.findOne(id).map(record -> ResponseEntity.ok().body(record))
+	public ResponseEntity<Funcao> findById(@PathVariable("id") int id) {
+		return funcaoService.findOne(id).map(record -> ResponseEntity.ok().body(record))
 				.orElse(ResponseEntity.notFound().build());
-
 	}
 
 	@PutMapping(value = "/{id}",
 	        consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Empresa> update(@PathVariable("id") int id, @RequestBody Empresa empresa) {
-		if (empresaService.findOne(id).isPresent()) {
-	        Empresa empresaReturn = empresaService.save(empresa);	
-		return ResponseEntity.ok().body(empresaReturn);
+	public ResponseEntity<Funcao> update(@PathVariable("id") int id, @RequestBody Funcao funcao) {
+		if (funcaoService.findOne(id).isPresent()) {
+	        Funcao funcaoReturn = funcaoService.save(funcao);	
+		return ResponseEntity.ok().body(funcaoReturn);
 	    }
             return ResponseEntity.notFound().build();
 	}
 
 	@DeleteMapping(path = { "/{id}" })
 	public ResponseEntity<?> delete(@PathVariable int id) {
-		return empresaService.findOne(id).map(record -> {
-			empresaService.delete(id);
+		return funcaoService.findOne(id).map(record -> {
+			funcaoService.delete(id);
 			return ResponseEntity.ok().build();
 		}).orElse(ResponseEntity.notFound().build());
 	}
 
-	//Listagem das Empresas; 
+	//Listagem das Funcoes; 
 	@GetMapping
-	public ResponseEntity<List<Empresa>> findAll() {
-			return ResponseEntity.ok(empresaService.findAll());
+	public ResponseEntity<List<Funcao>> findAll() {
+			return ResponseEntity.ok(funcaoService.findAll());
 	}
 	
 }
