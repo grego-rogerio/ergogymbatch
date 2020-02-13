@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.consultoria.ergogymbatch.model.Funcao;
+import com.consultoria.ergogymbatch.model.Setor;
 import com.consultoria.ergogymbatch.repository.FuncaoRepository;
 
 @Service
@@ -16,6 +17,10 @@ public class FuncaoService {
 	
 	public List<Funcao> findAll() {
 		return funcaoRepository.findAll();
+	}
+	
+	public Optional<List<Funcao>> findByIdSetor(Integer id) {
+		return funcaoRepository.findByIdSetor(id);
 	}
 	
 	public Optional<Funcao> findOne(Integer id) {

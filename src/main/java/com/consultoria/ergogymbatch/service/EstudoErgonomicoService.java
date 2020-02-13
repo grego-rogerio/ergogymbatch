@@ -14,6 +14,15 @@ public class EstudoErgonomicoService {
 	@Autowired
 	private EstudoErgonomicoRepository estudoErgonomicoRepository;
 	
+	public Optional<List<EstudoErgonomico>> findAllFiltros(Integer idEmpresa, Integer idSetor, Integer idFuncao) {
+		if(idSetor==null) {
+			return estudoErgonomicoRepository.findEmpresaFiltros(idEmpresa);
+		}else if(idFuncao==null) {
+			return estudoErgonomicoRepository.findSetorEmpresaFiltros(idEmpresa, idSetor);
+		}
+		return estudoErgonomicoRepository.findAllFiltros(idEmpresa,idSetor,idFuncao);
+	}	
+	
 	public List<EstudoErgonomico> findAll() {
 		return estudoErgonomicoRepository.findAll();
 	}

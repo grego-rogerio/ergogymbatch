@@ -1,6 +1,9 @@
 package com.consultoria.ergogymbatch.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.consultoria.ergogymbatch.model.EstudoErgonomico;
@@ -58,6 +62,19 @@ public class EstudoErgonomicoController {
 	@GetMapping
 	public ResponseEntity<List<EstudoErgonomico>> findAll() {
 			return ResponseEntity.ok(estudoErgonomicoService.findAll());
+	}
+	
+	@GetMapping(path = "/filtros")
+	public ResponseEntity<List<EstudoErgonomico>> findAllFiltros(@RequestParam("idEmpresa") Integer idEmpresa,
+			@RequestParam(value="idSetor", required=false) Integer idSetor, @RequestParam(value="idFuncao", required=false) Integer idFuncao){
+		Optional<List<EstudoErgonomico>> estudos =estudoErgonomicoService.findAllFiltros(idEmpresa,idSetor,idFuncao);
+		if(estudos.isPresent()) {
+			return ResponseEntity.ok(estudos.get());
+			
+		}else {
+			return ResponseEntity.ok(new ArrayList<EstudoErgonomico>());
+		}
+		
 	}
 	
 }

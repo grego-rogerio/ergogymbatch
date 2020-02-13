@@ -30,4 +30,8 @@ public class SetorService {
 		setorRepository.deleteById(id);
 	}
 	
+	public Optional<List<Setor>> findSetorWithFuncao() {
+		return setorRepository.findSetorWithFuncao();
+	}
+	
 }

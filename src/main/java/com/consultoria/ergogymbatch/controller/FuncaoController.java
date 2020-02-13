@@ -1,6 +1,8 @@
 package com.consultoria.ergogymbatch.controller;
 
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -57,6 +59,18 @@ public class FuncaoController {
 	@GetMapping
 	public ResponseEntity<List<Funcao>> findAll() {
 			return ResponseEntity.ok(funcaoService.findAll());
+	}
+	
+	
+	@GetMapping(path = { "/setor/{id}" })
+	public ResponseEntity<List<Funcao>> findByIdSetor(@PathVariable("id") int id) {
+		Optional<List<Funcao>> funcoes =funcaoService.findByIdSetor(id);
+		if(funcoes.isPresent()) {
+			return ResponseEntity.ok(funcoes.get());
+			
+		}else {
+			return ResponseEntity.notFound().build();
+		}
 	}
 	
 }

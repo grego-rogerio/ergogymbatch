@@ -1,6 +1,5 @@
 package com.consultoria.ergogymbatch.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -9,14 +8,16 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+
 @Entity
 public class Funcao {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	private String nome;
-    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.MERGE)
-    @JoinColumn(name="ID_SETOR", nullable=false)
+	
+    @ManyToOne
+    @JoinColumn(name="ID_SETOR")
 	private Setor setor;
 
 	public Integer getId() {
